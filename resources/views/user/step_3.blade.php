@@ -49,7 +49,7 @@
                         @csrf
                         @method('post')
 {{--                       Форма вопроса --}}
-                        <div class="bg-body-secondary p-3 mt-3">
+                        <div class="p-3 mt-3 text-white" style="background-color:#0D0497; color: white; border-radius: 10px ">
                             <div class="mt-2">
                                 <label for="question">Вопрос</label>
                                 <textarea class="form-control @error('question') is-invalid @enderror" type="text" id="question" name="question"></textarea>
@@ -116,17 +116,22 @@
 
                                                     <div class="mt-3 border-bottom w-100 d-flex justify-content-between">
                                                         <div class="" style="width: 90%">
-                                                            <span>Вопрос: {{$quest->question}}</span>
-                                                            <br>
-                                                            <span>Cтоимость: {{$quest->cost}}</span>
-                                                            @if($quest->img!==null)
-                                                                <div class="">
-                                                                    <span>Картинка:</span>
-                                                                    <div style="width: 100px; height: 100px">
-                                                                        <img src="{{asset($quest->img)}}" alt="image" style="width: 100%; height: 100%; object-fit: cover">
+                                                            <span><b>ID Вопроса {{$quest->id}}</b></span>
+                                                            <div class="" style="margin-left: 10px">
+                                                                <span>Вопрос: {{$quest->question}}</span>
+                                                                <br>
+                                                                <span>Cтоимость: {{$quest->cost}}</span> <br>
+                                                                @if($quest->img!==null)
+                                                                    <div class="">
+                                                                        <span>Картинка:</span>
+                                                                        <div style="width: 100px; height: 100px">
+                                                                            <img src="{{asset($quest->img)}}" alt="image" style="width: 100%; height: 100%; object-fit: cover">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            @endif
+                                                                @endif
+                                                                <span>Ответ: {{$quest->right_answer}}</span>
+                                                            </div>
+
 
                                                         </div>
                                                         <div class="p-0 m-0">
@@ -147,7 +152,7 @@
                         @endforeach
                         {{--                    --}}
                         <div class="mt-3 w-100 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary" style="position: fixed; bottom: 30px">Добавить вопрос</button>
+                            <button type="submit" class="btn text-white" style="position: fixed; bottom: 30px; background-color:#0D0497;">Добавить вопрос</button>
                         </div>
                     </form>
 

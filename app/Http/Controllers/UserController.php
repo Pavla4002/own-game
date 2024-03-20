@@ -52,4 +52,9 @@ class UserController extends Controller
             return redirect()->back()->with('error','Неправильный логин или пароль');
         }
     }
+
+    public function exit(){
+        Auth::logout();
+        return redirect()->route('welcome');
+    }
 }

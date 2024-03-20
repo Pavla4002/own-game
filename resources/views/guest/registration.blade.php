@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center w-100">
-                            <button type="submit" class="btn btn-primary">Регистрация</button>
+                            <button type="submit" class="btn text-white" style="background-color:#0D0497;">Регистрация</button>
                         </div>
                     </form>
                 </div>

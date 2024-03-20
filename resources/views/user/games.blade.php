@@ -9,7 +9,7 @@
                 {{--            Игры--}}
                 <div class="d-flex flex-wrap w-100 justify-content-sm-between">
                     <h3 style="margin-right: 30px">Игры</h3>
-                    <a href="{{route('add_game_page')}}" class="btn btn-primary">Создать новую игру</a>
+                    <a href="{{route('add_game_page')}}" class="btn text-white" style="background-color:#0D0497;">Создать новую игру</a>
                 </div>
                 <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                     @if(count($games)>0)

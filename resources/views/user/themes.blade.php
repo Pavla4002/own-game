@@ -5,13 +5,13 @@
 @section('main')
     <div class="container-fluid p-0 w-100" style="min-height: 80vh">
         <div class="w-100" style="position: absolute;top:20vh;  bottom: 0;">
-            <div class="container-fluid w-75 pt-5" style="min-width: 300px">
-                <div class="container-fluid" style="min-width: 300px">
+            <div class="container-fluid w-75 pt-5 pb-5" style="min-width: 300px">
+                <div class="container-fluid p-0" style="min-width: 300px">
                     <div class="d-flex flex-wrap w-100 justify-content-sm-between">
                         <h3>Создание новой категории</h3>
                     </div>
                     <div class="w-100">
-                        <form action="{{route('add_theme')}}" method="post" class="mt-3 bg-body-secondary p-3">
+                        <form action="{{route('add_theme')}}" method="post" class="mt-3 p-3" style="background-color:#0D0497; color: white; border-radius: 10px ">
                             @csrf
                             @method('post')
                             <div class="mb-3">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="w-100 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">Создать</button>
+                                <button type="submit" class="btn btn-light">Создать</button>
                             </div>
                         </form>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                     @if(count($themes)>0)
                         @foreach($themes as $theme)
-                            <div class="shadow mt-1 p-3 d-flex align-items-center justify-content-between">
+                            <div class="shadow mt-3 p-3 d-flex align-items-center justify-content-between">
                                 <span >
                                     {{$theme->title}}
                                 </span>

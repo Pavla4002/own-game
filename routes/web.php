@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-//Route::get('/exit',[\App\Http\Controllers\UserController::class,'exit'])->name('exit');
+Route::get('/', [\App\Http\Controllers\PageController::class,'welcome'])->name('welcome');
+Route::get('/exit',[\App\Http\Controllers\UserController::class,'exit'])->name('exit');
 //
 Route::get('/reg',[\App\Http\Controllers\PageController::class,'reg_page'])->name('reg_page');
 Route::post('/reg/user',[\App\Http\Controllers\UserController::class,'reg_user'])->name('reg_user');

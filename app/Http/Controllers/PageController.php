@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     //
+    public function welcome(){
+        return view('welcome');
+    }
     public function login(){
         return view('guest.authorization');
     }
@@ -33,7 +36,7 @@ class PageController extends Controller
     public function step_2($id){
         $game = Game::query()->where('id',$id)->first();
         $themes = Theme::all();
-        $game_themes = GameTheme::query()->where('game_id',$id)->get();
+        $game_themes = GameTheme::query()->where('game_id',$id)->orderBy('round')->get();
         $helpers = [];
         $count=0;
         foreach ($game_themes as $g_t){
@@ -56,10 +59,10 @@ class PageController extends Controller
     }
 
     public function quest_page($id){
-        $questions = Question::all();
+        $questions = Question::query()->orderBy('cost')->get();
         $game = Game::query()->where('id',$id)->first();
         $themes = Theme::all();
-        $game_themes = GameTheme::query()->where('game_id',$id)->get();
+        $game_themes = GameTheme::query()->where('game_id',$id)->orderBy('round')->get();
         $helpers = [];
         $count=0;
         foreach ($game_themes as $g_t){

@@ -38,7 +38,7 @@
                     <form action="{{route('add_round',['id'=>$game->id])}}" method="post">
                         @csrf
                         @method('post')
-                            <div class="mt-3 p-3 bg-body-secondary">
+                            <div class="mt-3 p-3 text-white" style="background-color:#0D0497;border-radius: 10px">
                                 <label for="round">Раунд №</label>
                                 <input type="text" id="round" class="form-control @error('round') is-invalid @enderror" name="round">
                                 <div class="invalid-feedback">
@@ -64,7 +64,7 @@
                                 @endforeach
                             </div>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary mt-3">Добавить этот раунд</button>
+                            <button class="btn text-white mt-3" style="background-color:#0D0497;">Добавить этот раунд</button>
                         </div>
                     </form>
 
@@ -79,7 +79,7 @@
                                 @foreach($helpers as $helper)
                                     <div class="shadow mt-3 p-3">
                                         <div class="w-100 d-flex justify-content-between">
-                                            <span>Раунд №{{$helper->round}}</span>
+                                            <span> <b>Раунд №{{$helper->round}}</b></span>
                                             <a href="{{route('del_round',['id'=>$game->id,'round'=>$helper->round])}}" class="btn btn-light">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -93,8 +93,7 @@
                                                 @if($game_theme->round ===$helper->round)
                                                     <div class="d-flex w-100 justify-content-between">
                                                         <div class="">
-                                                            <label for="them_{{$game_theme->them->id}}"> <b>{{$game_theme->them->title}}</b></label>
-                                                            <input type="radio" class="form-check-input" value="{{$game_theme->them->id}}" id="them_{{$game_theme->them->id}}" name="them"/>
+                                                            {{$game_theme->theme->title}}
                                                         </div>
                                                         <a href="{{route('remove_theme_game',['id'=>$game_theme->id])}}" class="btn btn-light">
                                                           -

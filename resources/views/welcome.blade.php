@@ -7,7 +7,7 @@
         <div class="d-flex justify-content-center align-items-center w-100" style="position: absolute;top:0;  bottom: 0;">
             <div class="" style="display:flex; flex-direction: column; justify-content: space-between; align-items: center; height:100px;">
                 <h3>Для начала работы необходимо авторизоваться</h3>
-                <a href="{{route('login')}}" class="btn btn-primary w-50">Вход</a>
+                <a href="{{route('login')}}" class="btn text-white w-50" style="background-color:#0D0497;">Вход</a>
             </div>
         </div>
     </div>

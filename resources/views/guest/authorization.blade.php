@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center w-100">
-                                    <button type="submit" class="btn btn-primary">Авторизация</button>
+                                    <button type="submit" class="btn text-white" style="background-color:#0D0497;">Авторизация</button>
                                 </div>
                             </form>
                         </div>
