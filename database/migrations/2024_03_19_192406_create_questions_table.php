@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('img')->nullable();
             $table->foreignIdFor(\App\Models\Theme::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('status')->default(0);
+            $table->integer('cost');
             $table->timestamps();
         });
     }

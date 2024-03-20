@@ -30,6 +30,7 @@ Route::post('/them/round/add/{id}',[\App\Http\Controllers\GameThemeController::c
 Route::get('/them/round/del/{id}/{round}',[\App\Http\Controllers\GameThemeController::class,'del_round'])->name('del_round');
 ////questions
 Route::get('/them/questions/{id}',[\App\Http\Controllers\PageController::class,'quest_page'])->name('quest_page');
-//Route::post('/them/questions/add',[\App\Http\Controllers\QuestionController::class,'create'])->name('add_question');
-//Route::get('/them/questions/del/{id}',[\App\Http\Controllers\QuestionController::class,'destroy'])->name('del_quest_them');
-//Route::post('/them/questions/edit/{id}',[\App\Http\Controllers\QuestionController::class,'edit'])->name('edit_question');
+Route::post('/them/questions/add',[\App\Http\Controllers\QuestionController::class,'create'])->name('add_question');
+Route::get('/them/questions/del/{id}',[\App\Http\Controllers\QuestionController::class,'destroy'])->name('del_quest_them');
+Route::post('/them/questions/edit/{id}/{game}',[\App\Http\Controllers\QuestionController::class,'edit'])->name('edit_question');
+Route::get('/them/questions/edit/page/{id}/{game}',[\App\Http\Controllers\PageController::class,'edit_quest_page'])->name('edit_quest_page');

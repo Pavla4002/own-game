@@ -18,9 +18,36 @@ class QuestionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'question'=>['required'],
+            'right_answer'=>['required'],
+            'img'=>['nullable'],
+            'cost'=>['required','numeric'],
+        ],[
+            'question.required'=>'Обязательное поле',
+            'right_answer.required'=>'Обязательное поле',
+            'cost.required'=>'Обязательное поле',
+            'cost.numeric'=>'Числовое поле',
+        ]);
+        if($request->them){
+            $question = new Question();
+            $question->question=$request->question;
+            $question->right_answer=$request->right_answer;
+            $question->cost=$request->cost;
+            if($request->file('img')){
+                $path = $request->file('img')->store('img');
+                $question->img = 'storage/'.$path;
+            }
+            $question->theme_id=$request->them;
+            $question->save();
+            return redirect()->back();
+        }else{
+            return redirect()->back()->with('error','Необходимо определить категорию');
+        }
+
+
     }
 
     /**
@@ -42,10 +69,32 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(Request $request,$id,$game)
     {
-        //
-    }
+        $request->validate([
+            'question'=>['required'],
+            'right_answer'=>['required'],
+            'img'=>['nullable'],
+            'cost'=>['required','numeric'],
+        ],[
+            'question.required'=>'Обязательное поле',
+            'right_answer.required'=>'Обязательное поле',
+            'cost.required'=>'Обязательное поле',
+            'cost.numeric'=>'Числовое поле',
+        ]);
+
+            $question = Question::query()->where('id',$id)->first();
+            $question->question=$request->question;
+            $question->right_answer=$request->right_answer;
+            $question->cost=$request->cost;
+            if($request->file('img')){
+                $path = $request->file('img')->store('img');
+                $question->img = 'storage/'.$path;
+            }
+            $question->update();
+            return redirect()->route('quest_page',['id'=>$game]);
+        }
+
 
     /**
      * Update the specified resource in storage.
@@ -58,8 +107,9 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        Question::query()->where('id',$id)->delete();
+        return redirect()->back();
     }
 }

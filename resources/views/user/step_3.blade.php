@@ -45,7 +45,7 @@
                         @endif
                     </div>
 {{--                    --}}
-                    <form action="{{route('add_question')}}" method="post">
+                    <form action="{{route('add_question')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('post')
 {{--                       Форма вопроса --}}
@@ -91,7 +91,7 @@
                         {{--                    --}}
                         <div class="mt-2">Необходимо выбрать категорию:</div>
                         @if(count($helpers)===0)
-                            <h5>Пока тут пусто. Сначала необходимо добавить раунды и категории - <a href="{{route('step_2',['id'=>$game->id])}}">Категории</a></h5>
+                            <h6>Пока тут пусто. Сначала необходимо добавить раунды и категории - <a href="{{route('step_2',['id'=>$game->id])}}">Категории</a></h6>
                         @endif
                         @foreach($helpers as $helper)
                             <div class="shadow mt-3 p-3">
@@ -101,8 +101,8 @@
                                         @if($game_theme->round ===$helper->round)
                                             <div class="d-flex w-100 justify-content-between">
                                                 <div class="">
-                                                    <label for="them_{{$game_theme->them->id}}"> <b>{{$game_theme->them->title}}</b></label>
-                                                    <input type="radio" class="form-check-input" value="{{$game_theme->them->id}}" id="them_{{$game_theme->them->id}}" name="them"/>
+                                                    <label for="them_{{$game_theme->theme->id}}"> <b>{{$game_theme->theme->title}}</b></label>
+                                                    <input type="radio" class="form-check-input" value="{{$game_theme->theme->id}}" id="them_{{$game_theme->theme->id}}" name="them"/>
                                                 </div>
                                                 <a href="{{route('remove_theme_game',['id'=>$game_theme->id])}}" class="btn btn-light">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -112,64 +112,30 @@
                                                 </a>
                                             </div>
                                             @foreach($questions as $quest)
-                                                @if($quest->them_id===$game_theme->them->id)
+                                                @if($quest->theme_id===$game_theme->theme->id)
 
                                                     <div class="mt-3 border-bottom w-100 d-flex justify-content-between">
                                                         <div class="" style="width: 90%">
-                                                            <span>Вопрос: {{$quest->text}}  </span>
+                                                            <span>Вопрос: {{$quest->question}}</span>
                                                             <br>
                                                             <span>Cтоимость: {{$quest->cost}}</span>
+                                                            @if($quest->img!==null)
+                                                                <div class="">
+                                                                    <span>Картинка:</span>
+                                                                    <div style="width: 100px; height: 100px">
+                                                                        <img src="{{asset($quest->img)}}" alt="image" style="width: 100%; height: 100%; object-fit: cover">
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+
                                                         </div>
                                                         <div class="p-0 m-0">
                                                             <a class="btn btn-light" href="{{route('del_quest_them',['id'=>$quest->id])}}">-</a>
-                                                            <button class="btn-light btn" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal_{{$quest->id}}">
+                                                            <a class="btn-light btn" href="{{route('edit_quest_page',['id'=>$quest->id,'game'=>$game->id])}}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
                                                                 </svg>
-                                                            </button>
-{{--                                           modal                 --}}
-                                                            <div class="modal fade" id="exampleModal_{{$quest->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Редактирование вопроса</h1>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-{{--                                                                           --}}
-                                                                            <form action="{{route('edit_question',['id'=>$quest->id])}}" method="post">
-                                                                                @csrf
-                                                                                @method('post')
-                                                                                {{--                       Форма вопроса --}}
-                                                                                <div class="bg-body-secondary p-3 mt-3">
-                                                                                    <div class="mt-2">
-                                                                                        <label for="question">Вопрос</label>
-                                                                                        <input  class="form-control" type="text" id="question" name="question" value="{{$quest->text}}"/>
-                                                                                    </div>
-                                                                                    <div class="mt-2">
-                                                                                        <label for="right_answer">Правильный ответ</label>
-                                                                                        <input class="form-control " type="text" id="right_answer" name="right_answer" value="{{$quest->right_answer}}"/>
-                                                                                    </div>
-                                                                                    <div class="mt-2">
-                                                                                        <label for="img">Картинка <small class="fw-lighter">если необходима</small> </label>
-                                                                                        <input class="form-control " type="file" id="img" name="img">
-                                                                                    </div>
-                                                                                    <div class="mt-2">
-                                                                                        <label for="cost">Стоимость вопроса</label>
-                                                                                        <input class="form-control" type="number" id="cost" name="cost" value="{{$quest->cost}}">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="d-flex justify-content-end">
-                                                                                    <button type="submit" class="btn btn-primary">Редактировать</button>
-                                                                                </div>
-                                                                            {{--                             Форма вопроса --}}
-                                                                            </form>
-{{--                                                                            --}}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-{{--                                               modal             --}}
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 @endif
