@@ -14,6 +14,7 @@ Route::post('/auth/user',[\App\Http\Controllers\UserController::class,'auth_user
 Route::get('/games',[\App\Http\Controllers\PageController::class,'games'])->name('games');
 Route::get('/games/add/step_1/page',[\App\Http\Controllers\PageController::class,'add_game_page'])->name('add_game_page');
 Route::post('/game/add/step_1',[\App\Http\Controllers\GameController::class,'create'])->name('add_game');
+Route::put('/game/edit/{id}',[\App\Http\Controllers\GameController::class,'edit'])->name('edit_game');
 ////themes
 Route::get('/them/add/step_2/{id}',[\App\Http\Controllers\PageController::class,'step_2'])->name('step_2');
 Route::get('/them/page',[\App\Http\Controllers\PageController::class,'themes'])->name('themes');

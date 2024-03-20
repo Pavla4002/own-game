@@ -51,9 +51,17 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Game $game)
+    public function edit(Request $request,$id)
     {
-        //
+        $request->validate([
+            'title'=>['required'],
+        ],[
+            'title.required'=>'Обязательное поле',
+        ]);
+        $game = Game::query()->where('id',$id)->first();
+        $game->title = $request->title;
+        $game->update();
+        return redirect()->back();
     }
 
     /**
