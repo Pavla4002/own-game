@@ -11,7 +11,7 @@
                 <a href="{{route('quest_page',['id'=>$game->id])}}">Назад</a>
             </div>
             <div class="modal-body">
-                <form action="{{route('edit_question',['id'=>$quest->id,'game'=>$game->id])}}" method="post">
+                <form action="{{route('edit_question',['id'=>$quest->id,'game'=>$game->id])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="p-3 mt-3"  style="background-color:#0D0497; color: white; border-radius: 10px ">
@@ -35,7 +35,6 @@
                             <button type="submit" class="btn btn-light">Редактировать</button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

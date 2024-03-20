@@ -90,4 +90,28 @@ class PageController extends Controller
         return view('user.edit_quest')->with(compact('quest','game'));
     }
 
+    public function demo($id){
+        $game = Game::query()->where('id',$id)->first();
+        $game_themes = GameTheme::query()->where('game_id',$id)->get();
+        $helpers = [];
+        $count=0;
+        foreach ($game_themes as $g_t){
+            if(count($helpers)===0){
+                array_push($helpers,$g_t);
+            }else{
+                foreach ($helpers as $h){
+                    if($h->round===$g_t->round){
+                        $count+=1;
+                    }
+                }
+                if($count===0){
+                    array_push($helpers,$g_t);
+                }else{
+                    $count=0;
+                }
+            }
+        }
+        $questions = Question::query()->orderBy('cost')->get();
+        return view('user.demo')->with(compact('game','game_themes','helpers','questions'));
+    }
 }

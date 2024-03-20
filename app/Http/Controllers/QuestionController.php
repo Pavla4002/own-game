@@ -40,7 +40,7 @@ class QuestionController extends Controller
                 $path = $request->file('img')->store('img');
                 $question->img = 'storage/'.$path;
             }
-            $question->theme_id=$request->them;
+            $question->game_theme_id=$request->them;
             $question->save();
             return redirect()->back();
         }else{

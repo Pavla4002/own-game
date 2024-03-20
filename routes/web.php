@@ -33,3 +33,5 @@ Route::post('/them/questions/add',[\App\Http\Controllers\QuestionController::cla
 Route::get('/them/questions/del/{id}',[\App\Http\Controllers\QuestionController::class,'destroy'])->name('del_quest_them');
 Route::post('/them/questions/edit/{id}/{game}',[\App\Http\Controllers\QuestionController::class,'edit'])->name('edit_question');
 Route::get('/them/questions/edit/page/{id}/{game}',[\App\Http\Controllers\PageController::class,'edit_quest_page'])->name('edit_quest_page');
+//demo
+Route::get('/demo/{id}',[\App\Http\Controllers\PageController::class,'demo'])->name('demo');

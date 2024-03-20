@@ -67,7 +67,7 @@
                                             <a class="dropdown-item" href="{{route('step_2',['id'=>$game->id])}}">Подробнее</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">ДЕМО</a>
+                                            <a class="dropdown-item" href="{{route('demo',['id'=>$game->id])}}">ДЕМО</a>
                                         </li>
                                     </ul>
                                 </div>

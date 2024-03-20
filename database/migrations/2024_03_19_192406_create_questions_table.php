@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('question');
             $table->text('right_answer');
             $table->string('img')->nullable();
-            $table->foreignIdFor(\App\Models\Theme::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(\App\Models\GameTheme::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('status')->default(0);
             $table->integer('cost');
             $table->timestamps();

@@ -102,7 +102,7 @@
                                             <div class="d-flex w-100 justify-content-between">
                                                 <div class="">
                                                     <label for="them_{{$game_theme->theme->id}}"> <b>{{$game_theme->theme->title}}</b></label>
-                                                    <input type="radio" class="form-check-input" value="{{$game_theme->theme->id}}" id="them_{{$game_theme->theme->id}}" name="them"/>
+                                                    <input type="radio" class="form-check-input" value="{{$game_theme->id}}" id="them_{{$game_theme->theme->id}}" name="them"/>
                                                 </div>
                                                 <a href="{{route('remove_theme_game',['id'=>$game_theme->id])}}" class="btn btn-light">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -112,7 +112,7 @@
                                                 </a>
                                             </div>
                                             @foreach($questions as $quest)
-                                                @if($quest->theme_id===$game_theme->theme->id)
+                                                @if($quest->game_theme_id===$game_theme->id)
 
                                                     <div class="mt-3 border-bottom w-100 d-flex justify-content-between">
                                                         <div class="" style="width: 90%">
