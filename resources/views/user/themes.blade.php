@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3>Все категории</h3>
+                    <h5>Все категории</h5>
                 </div>
 {{--                themes--}}
                 <div class="accordion accordion-flush mt-3" id="accordionFlushExample">

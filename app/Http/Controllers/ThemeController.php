@@ -12,15 +12,25 @@ class ThemeController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>['required','unique:themes'],
+        ],[
+            'title.required'=>'Обязательное поле',
+            'title.unique'=>'Название должно быть уникальным',
+        ]);
+        $theme = new Theme();
+        $theme->title=$request->title;
+        $theme->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -36,15 +46,24 @@ class ThemeController extends Controller
      */
     public function show(Theme $theme)
     {
-        //
+       //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Theme $theme)
+    public function edit($id, Request $request)
     {
-        //
+        $request->validate([
+            'title1'=>['required'],
+        ],[
+            'title1.required'=>'Обязательное поле',
+        ]);
+        $theme = Theme::query()->where('id',$id)->first();
+        $theme->title = $request->title1;
+        $theme->update();
+
+        return redirect()->back();
     }
 
     /**
@@ -58,8 +77,9 @@ class ThemeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Theme $theme)
+    public function destroy($id)
     {
-        //
+        Theme::query()->where('id',$id)->delete();
+        return redirect()->back();
     }
 }

@@ -18,9 +18,18 @@ class GameController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>['required'],
+        ],[
+            'title.required'=>'Обязательное поле',
+        ]);
+
+        $game = new Game();
+        $game->title = $request->title;
+        $game->save();
+        return redirect()->route('step_2',['id'=>$game->id]);
     }
 
     /**

@@ -18,9 +18,32 @@ class GameThemeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id, Request $request)
     {
-        //
+        $request->validate([
+            'round'=>['required'],
+        ],[
+            'round.required'=>'Обязательное поле',
+        ]);
+
+        if($request->themes!==null){
+            foreach ($request->themes as $theme){
+                $game_themes = new GameTheme();
+                $game_themes->round = $request->round;
+                $game_themes->game_id = $id;
+                $game_themes->theme_id = $theme;
+                $game_themes->save();
+            }
+            return redirect()->back()->with('ok', 'Раунд успешно добавлен');
+        }else{
+            return redirect()->back()->with('error','Необходимо добавить категорию');
+        }
+
+    }
+
+    public function del_round($id,$round){
+       GameTheme::query()->where('game_id',$id)->where('round',$round)->delete();
+        return redirect()->back();
     }
 
     /**
@@ -58,8 +81,9 @@ class GameThemeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(GameTheme $gameTheme)
+    public function destroy($gameTheme)
     {
-        //
+        GameTheme::query()->where('id',$gameTheme)->delete();
+        return redirect()->back();
     }
 }

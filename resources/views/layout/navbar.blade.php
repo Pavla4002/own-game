@@ -10,8 +10,8 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 @auth()
                     <div class="navbar-nav">
-                        {{--                    <a class="nav-link active" aria-current="page" href="{{route('games')}}">Игры</a>--}}
-                        {{--                    <a class="nav-link" href="{{route('themes')}}">Категории</a>--}}
+                                            <a class="nav-link active" aria-current="page" href="{{route('games')}}">Игры</a>
+                                            <a class="nav-link" href="{{route('themes')}}">Категории</a>
                         {{--                    <a class="nav-link" href="{{route('exit')}}">Выход</a>--}}
                     </div>
                 @endauth
